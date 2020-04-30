@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="fr">
+<head>
+
+	<title>Rea log indice</title>
+
+	<!-- D3 JS BIBLIOTHEQUE -->
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+
+	<!-- Chargement du fichier contenant les contours des départements  -->
+	<script src="departements.json"></script>
+
+	<!-- CSS des Couleurs de la heatmap -->
+ 	<link rel="stylesheet" type="text/css" href="colorbrewer.css">
+
+ 	<!-- Bootstrap -->
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ 	<!-- CSS -->
+ 	<style type="text/css">
+		body{
+			text-align: center;
+			background: #FFF;
+			margin: 0;
+		}
+		div.tooltip_1 {
+		  	text-align: center;
+		  	padding: 4px;
+		  	font: 12px sans-serif;
+		  	background: lightsteelblue;
+		  	border: 0px;
+		  	border-radius: 8px;
+		  	pointer-events: none;
+		  	margin-left: 50px;
+		  	margin-top: 50px;
+		}
+		div.tooltip_2 {
+		  	padding: 4px;
+		  	font: 12px sans-serif;
+		  	text-align: left;
+		  	background: lightsteelblue;
+		  	border: 0px;
+		  	border-radius: 8px;
+		  	pointer-events: none;
+		  	margin-left: 50px;
+		  	margin-top: 5px;
+		}
+		.titre{
+			margin: 20px;
+			font-size: 20px;
+			font-style: italic;
+			text-align: left;
+			padding-left: 20px;
+			text-decoration: underline;
+		}
+		.menu{
+			width: 100%;
+		}
+		span{
+			margin-left: 5px;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			margin : 0px 40px 0px 0px;
+			display: inline;
+		}
+		a{
+			text-decoration: none;
+			color: #3EA8F0;
+		}
+		a:hover{
+			color: black;
+			font-weight: bold;
+		}
+		.marginleft{
+			margin-left: 20px;
+		}
+		.background_par_defaut{
+			fill:#FAFAF8;
+		}
+		.background_par_defaut_10{
+			fill:green;
+			opacity: 0.9;
+		}
+		.background_par_defaut_20{
+			fill:green;
+			opacity: 0.4;
+		}
+		.background_par_defaut_30{
+			fill:green;
+			opacity: 0.2;
+		}
+		.hide{display: none}
+		/*.contour{
+			border:solid 1px;
+		}*/
+		#play-button {
+	      background: #f08080;
+	      padding-right: 26px;
+	      border-radius: 3px;
+	      border: none;
+	      color: white;
+	      margin: 0;
+	      padding: 0 12px;
+	      width: 60px;
+	      cursor: pointer;
+	      height: 30px;
+	    }
+	    #play-button:hover {
+	      background-color: #696969;
+	    }   
+	    .legend_c{
+	    	font-size: 8px;
+	    	color: black;
+	    	font-weight:bold;
+	    	margin-left: 10px;
+	    }
+	</style>
+
+</head>
+
+<body>
+
+	<!-- TITRE de la page -->
+	<div class="titre">
+		Visualisation COVID-19 par département
+	</div>
+	<div style="font-size: 12px; margin-bottom:60px">
+		<ul>
+		    <li><a href="../hosp_pop/">Hospitalisés/Population</a></li>
+		    <li><a href="../hosp_lits/">Hospitalisés/Lits</a></li>
+		    <li><a href="../rea_pop/">Réanimations/Population</a></li>
+		    <li><a href="../rea_lits/">Réanimations/Lits</a></li>
+		    <li><a href="../hosp_indice/">Hospitalisés(nouveaux)/Hospitalisés(total)</a></li>
+		    <li><a href="../hosp_log_indice/">log(Hospitalisés(nouveaux))/log(Hospitalisés(total))</a></li>
+		    <li><a href="../rea_indice/">Réanimations(nouveaux)/Réanimations(total)</a></li>
+		    <li><a href="../rea_log_indice/">log(Réanimations(nouveaux))/log(Réanimations(total))</a></li>
+		</ul>
+	</div>
+
+	<!-- Balise du graphe -->
+	<div class="row">
+		<div class="col-2"></div>
+		<div class="col-2 legend1">
+			<div class="button_play"><button id="play-button">Play</button></div>
+			<div class="dates">
+				<svg id="dates" width="190" height="100" style="margin-top:20px">
+					<text x="10" y="40" font-size="30px" fill="black">2020-03-19</text>
+				</svg>
+			</div>
+		</div>
+		<div class="map col-8"></div>
+		<div class="graphe_3 col-1">
+			<div class="row legend">
+				
+			</div>
+		</div>
+
+	</div>
+
+  	
+  	<!-- Balise pour les choix -->
+	<!-- <div class="choices">
+	    <input id="express" type="checkbox" class="choice marginleft" name="express" value=3 style="margin-bottom: 10px" checked><span style="color:#FAD177;font-weight:bold">Diminue</span>
+	    <input id="super" type="checkbox" class="choice marginleft" name="super" value=2 style="margin-bottom: 10px" checked><span style="color:#50A569;font-weight:bold">Progresse</span>
+	    <input id="hyper" type="checkbox" class="choice marginleft" name="hyper" value=1 style="margin-bottom: 10px" checked><span style="color:#154587;font-weight:bold">Indétérminés</span>
+	    <input id="hyper" type="checkbox" class="choice marginleft" name="manque" value=4 style="margin-bottom: 10px" checked><span style="color:#black;font-weight:bold">Donnees manquantes</span>
+	    <input id="heatmap" type="checkbox" class="heatmap marginleft" name="heatmap" value="heatmap" style="margin-bottom: 10px" checked><span>Densité de population </span>
+	    <SELECT class="CA_choices marginleft" name="nom" size="1">
+			<OPTION value="total">CA Total
+			<OPTION value="livraison">CA Livraison
+			<OPTION value="pt_relai">CA Pt Relai
+			<OPTION value="drive">CA Drive
+			<OPTION value="paiement_reception">CA Paiement Réception
+			<OPTION value="online">CA Paiement Online
+		</SELECT>
+		<SELECT class="Month_choices marginleft" name="nom" size="1">
+			<OPTION value=1 >Janvier
+			<OPTION value=2 >Fevrier
+			<OPTION value=3 >Mars
+			<OPTION value=4 >Avril
+			<OPTION value=5 >Mai
+			<OPTION value=6 >Juin
+			<OPTION value=7 >Juillet				
+		</SELECT>
+  	</div> -->
+
+	<!-- <script src="2018.js"></script> -->
+	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+	<script src="map.js"></script>
+
+</body>
