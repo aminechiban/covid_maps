@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<html lang="fr">
+<head>
+
+	<title>Covid-19 Visualisations</title>
+
+	<!-- D3 JS BIBLIOTHEQUE -->
+	<script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+
+	<!-- CSS des Couleurs de la heatmap -->
+ 	<link rel="stylesheet" type="text/css" href="colorbrewer.css">
+
+ 	<!-- Bootstrap -->
+ 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ 	<!-- CSS -->
+ 	<style type="text/css">
+		body{
+			text-align: center;
+			background: #FFF;
+			margin: 0;
+		}
+		div.tooltip_1 {
+		  	text-align: center;
+		  	padding: 4px;
+		  	font: 12px sans-serif;
+		  	background: lightsteelblue;
+		  	border: 0px;
+		  	border-radius: 8px;
+		  	pointer-events: none;
+		  	margin-left: 50px;
+		  	margin-top: 50px;
+		}
+		div.tooltip_2 {
+		  	padding: 4px;
+		  	font: 12px sans-serif;
+		  	text-align: left;
+		  	background: lightsteelblue;
+		  	border: 0px;
+		  	border-radius: 8px;
+		  	pointer-events: none;
+		  	margin-left: 50px;
+		  	margin-top: 5px;
+		}
+		.titre{
+			margin: 20px;
+			font-size: 20px;
+			font-style: italic;
+			text-align: left;
+			padding-left: 20px;
+			text-decoration: underline;
+		}
+		.menu{
+			width: 100%;
+		}
+		span{
+			margin-left: 5px;
+		}
+		ul{
+			list-style: none;
+		}
+		li{
+			margin : 0px 40px 0px 0px;
+			display: inline;
+		}
+		a{
+			text-decoration: none;
+			color: #3EA8F0;
+		}
+		a:hover{
+			color: black;
+			font-weight: bold;
+		}
+		.marginleft{
+			margin-left: 20px;
+		}
+		.background_par_defaut{
+			fill:#FAFAF8;
+		}
+		.background_par_defaut_10{
+			fill:green;
+			opacity: 0.9;
+		}
+		.background_par_defaut_20{
+			fill:green;
+			opacity: 0.4;
+		}
+		.background_par_defaut_30{
+			fill:green;
+			opacity: 0.2;
+		}
+		.hide{display: none}
+		/*.contour{
+			border:solid 1px;
+		}*/
+		#play-button {
+	      background: #f08080;
+	      padding-right: 26px;
+	      border-radius: 3px;
+	      border: none;
+	      color: white;
+	      margin: 0;
+	      padding: 0 12px;
+	      width: 60px;
+	      cursor: pointer;
+	      height: 30px;
+	    }
+	    #play-button:hover {
+	      background-color: #696969;
+	    }   
+	    .legend_c{
+	    	font-size: 8px;
+	    	color: black;
+	    	font-weight:bold;
+	    	margin-left: 10px;
+	    }
+	</style>
+
+</head>
+
+<body>
+
+	<!-- TITRE de la page -->
+	<div class="titre">
+		Visualisation COVID-19 par département
+	</div>
+	<div style="font-size: 12px; margin-bottom:60px">
+		<ul>
+		    <li><a href="hosp_pop/">Hospitalisés/Population</a></li>
+		    <li><a href="hosp_lits/">Hospitalisés/Lits</a></li>
+		    <li><a href="rea_pop/">Réanimations/Population</a></li>
+		    <li><a href="rea_lits/">Réanimations/Lits</a></li>
+		    <li><a href="hosp_indice/">Hospitalisés(nouveaux)/Hospitalisés(total)</a></li>
+		    <li><a href="hosp_log_indice/">log(Hospitalisés(nouveaux))/log(Hospitalisés(total))</a></li>
+		    <li><a href="rea_indice/">Réanimations(nouveaux)/Réanimations(total)</a></li>
+		    <li><a href="rea_log_indice/">log(Réanimations(nouveaux))/log(Réanimations(total))</a></li>
+		</ul>
+	</div>
+
+</body>
+
+</html>
