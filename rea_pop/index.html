@@ -8,9 +8,6 @@
 	<!-- D3 JS BIBLIOTHEQUE -->
 	<script src="../d3.min.js" charset="utf-8"></script>
 
-	<!-- Chargement du fichier contenant les contours des départements  -->
-	<script src="departements.json"></script>
-
 	<!-- CSS des Couleurs de la heatmap -->
  	<link rel="stylesheet" type="text/css" href="colorbrewer.css">
 
@@ -24,7 +21,7 @@
 			background: #FFF;
 			margin: 0;
 		}
-		div.tooltip_1 {
+		div.tooltip {
 		  	text-align: center;
 		  	padding: 4px;
 		  	font: 12px sans-serif;
@@ -34,17 +31,6 @@
 		  	pointer-events: none;
 		  	margin-left: 50px;
 		  	margin-top: 50px;
-		}
-		div.tooltip_2 {
-		  	padding: 4px;
-		  	font: 12px sans-serif;
-		  	text-align: left;
-		  	background: lightsteelblue;
-		  	border: 0px;
-		  	border-radius: 8px;
-		  	pointer-events: none;
-		  	margin-left: 50px;
-		  	margin-top: 5px;
 		}
 		.titre{
 			margin: 20px;
@@ -160,33 +146,6 @@
 		</div>
 
 	</div>
-
-  	
-  	<!-- Balise pour les choix -->
-	<!-- <div class="choices">
-	    <input id="express" type="checkbox" class="choice marginleft" name="express" value=3 style="margin-bottom: 10px" checked><span style="color:#FAD177;font-weight:bold">Diminue</span>
-	    <input id="super" type="checkbox" class="choice marginleft" name="super" value=2 style="margin-bottom: 10px" checked><span style="color:#50A569;font-weight:bold">Progresse</span>
-	    <input id="hyper" type="checkbox" class="choice marginleft" name="hyper" value=1 style="margin-bottom: 10px" checked><span style="color:#154587;font-weight:bold">Indétérminés</span>
-	    <input id="hyper" type="checkbox" class="choice marginleft" name="manque" value=4 style="margin-bottom: 10px" checked><span style="color:#black;font-weight:bold">Donnees manquantes</span>
-	    <input id="heatmap" type="checkbox" class="heatmap marginleft" name="heatmap" value="heatmap" style="margin-bottom: 10px" checked><span>Densité de population </span>
-	    <SELECT class="CA_choices marginleft" name="nom" size="1">
-			<OPTION value="total">CA Total
-			<OPTION value="livraison">CA Livraison
-			<OPTION value="pt_relai">CA Pt Relai
-			<OPTION value="drive">CA Drive
-			<OPTION value="paiement_reception">CA Paiement Réception
-			<OPTION value="online">CA Paiement Online
-		</SELECT>
-		<SELECT class="Month_choices marginleft" name="nom" size="1">
-			<OPTION value=1 >Janvier
-			<OPTION value=2 >Fevrier
-			<OPTION value=3 >Mars
-			<OPTION value=4 >Avril
-			<OPTION value=5 >Mai
-			<OPTION value=6 >Juin
-			<OPTION value=7 >Juillet				
-		</SELECT>
-  	</div> -->
 
 	<!-- <script src="2018.js"></script> -->
 	<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>

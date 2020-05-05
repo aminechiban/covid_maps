@@ -14,31 +14,8 @@
  	<!-- CSS -->
  	<style type="text/css">
 		body{
-			text-align: center;
 			background: #FFF;
 			margin: 0;
-		}
-		div.tooltip_1 {
-		  	text-align: center;
-		  	padding: 4px;
-		  	font: 12px sans-serif;
-		  	background: lightsteelblue;
-		  	border: 0px;
-		  	border-radius: 8px;
-		  	pointer-events: none;
-		  	margin-left: 50px;
-		  	margin-top: 50px;
-		}
-		div.tooltip_2 {
-		  	padding: 4px;
-		  	font: 12px sans-serif;
-		  	text-align: left;
-		  	background: lightsteelblue;
-		  	border: 0px;
-		  	border-radius: 8px;
-		  	pointer-events: none;
-		  	margin-left: 50px;
-		  	margin-top: 5px;
 		}
 		.titre{
 			margin: 20px;
@@ -50,14 +27,15 @@
 		}
 		.menu{
 			width: 100%;
+			margin-bottom: 50px;
 		}
 		span{
 			margin-left: 5px;
 		}
-		ul{
+		.menu > ul{
 			list-style: none;
 		}
-		li{
+		.menu > ul > li{
 			margin : 0px 40px 0px 0px;
 			display: inline;
 		}
@@ -117,24 +95,39 @@
 </head>
 
 <body>
-
+<div class="container">
 	<!-- TITRE de la page -->
-	<div class="titre">
+	<div class="titre row">
 		Visualisation COVID-19 par département
 	</div>
-	<div style="font-size: 12px; margin-bottom:60px">
+	<div class="row menu" style="font-size: 14px; text-align: center">
 		<ul>
 		    <li><a href="hosp_pop/">Hospitalisés/Population</a></li>
 		    <li><a href="hosp_lits/">Hospitalisés/Lits</a></li>
 		    <li><a href="rea_pop/">Réanimations/Population</a></li>
 		    <li><a href="rea_lits/">Réanimations/Lits</a></li>
-		    <li><a href="hosp_indice/">Hospitalisés(nouveaux)/Hospitalisés(total)</a></li>
+		    <!-- <li><a href="hosp_indice/">Hospitalisés(nouveaux)/Hospitalisés(total)</a></li>
 		    <li><a href="hosp_log_indice/">log(Hospitalisés(nouveaux))/log(Hospitalisés(total))</a></li>
 		    <li><a href="rea_indice/">Réanimations(nouveaux)/Réanimations(total)</a></li>
-		    <li><a href="rea_log_indice/">log(Réanimations(nouveaux))/log(Réanimations(total))</a></li>
+		    <li><a href="rea_log_indice/">log(Réanimations(nouveaux))/log(Réanimations(total))</a></li> -->
 		</ul>
 	</div>
-
+	<div class="row" style="font-size: 14px">
+		Les visualisations présentent quatres indicateurs nécéssaires afin de suivre l'évolution du Covid-19 par département et par jour en France. Pour les réaliser, j'ai préparé un workflow de données sur l'outil Dataiku, qui récupèrent les données à jour à partir du siteweb data.gouv.fr puis fait des traitement afin de récupérer les indicteurs voulus. 
+	</br>
+		Ces derniers sont les suivants :
+		<ul style="margin-top: 10px; margin-bottom: 10px;">
+		    <li><a href="hosp_pop/">Hospitalisés/Population</a></li> log ( 1 + Nombre de personnes hospitalisés cumulé / le nombre de personne du département )
+		    <li><a href="hosp_lits/">Hospitalisés/Lits</a></li> log ( 1 + Nombre de personnes hospitalisés cumulé / le nombre de lits dans les hopitaux du département* )
+		    <li><a href="rea_pop/">Réanimations/Population</a></li> log ( 1 + Nombre de personnes en réanimation cumulé / le nombre de personne du département )
+		    <li><a href="rea_lits/">Réanimations/Lits</a></li> log ( 1 + Nombre de personnes en réanimation cumulé / le nombre de lits dans les hopitaux du département* )
+		</ul>
+	</br></br>
+	En survolant les départements : Nombre de personnes dans les hopitaux au jour j, et le nombre de décés cumulé.
+	</br></br>
+	le nombre de lits dans les hopitaux du département : données avant Covid-19
+	</div>
+</div>
 </body>
 
 </html>
