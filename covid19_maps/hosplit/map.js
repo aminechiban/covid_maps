@@ -13,14 +13,13 @@ var svg_map_1 = d3.select( ".map" )
   		.append( "svg" )
 		  .attr( "width", 630 )
 		  .attr( "height", 540 )
-		  .attr("class","Reds contour")
 		  .attr("style","opacity:0.8");
 
 d3.select(".map")
-  		.append("button")
+  		.append("i")
   		.attr("id","play-button")
-  		.attr("class","button-play")
-  		.text("Play")
+  		.attr("font-size","40px")
+  		.attr("class","fas fa-play");
 
 var playButton = d3.select("#play-button");
 
@@ -181,15 +180,15 @@ var path = d3.geoPath()
 					playButton
 					    .on("click", function() {
 					    var button = d3.select(this);
-					    if (button.text() == "Pause") {
+					    if (d3.select("#play-button").attr("class") == "fas fa-pause") {
 					      moving = false;
 					      clearInterval(timer);
 					      // timer = 0;
-					      button.text("Play");
+					      playButton.attr("class","fas fa-play");
 					    } else {
 					      moving = true;
 					      timer = setInterval(step, 200);
-					      button.text("Pause");
+					      playButton.attr("class","fas fa-pause");
 					    }
 					  })
 
@@ -201,7 +200,7 @@ var path = d3.geoPath()
 						if(t>dates.length-1){
 							moving = false;
 							clearInterval(timer);
-							playButton.text("Play");
+							playButton.attr("class","fas fa-play");
 							t = 0;
 						}
 					}
