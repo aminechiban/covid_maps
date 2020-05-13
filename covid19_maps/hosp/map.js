@@ -139,7 +139,7 @@ var path = d3.geoPath()
 
 
 	        /*Colorier les departements*/
-			d3.csv("hosp_log_10.csv", function(data_jour){
+			d3.csv("../hosp_log_10.csv", function(data_jour){
 				
 
 				/*FONCTION POUR AJOUTER LE HEATMAP, utilisée plus bas*/
