@@ -193,19 +193,33 @@ var path = d3.geoPath()
 					      playButton.attr("class","fas fa-play");
 					    } else {
 					      moving = true;
-					      timer = setInterval(step, 200);
+					      timer = setInterval(step, 125);
+					      timer_2 = setInterval(step_2, 200);
 					      playButton.attr("class","fas fa-pause");
 					    }
 					  })
 
 					function step() {
+
+						avec_heatmap(dates[t]["dates"]);
+						d3.select("#dates").text(dates[t]["dates"]);
+						t = t+1;
+
+						if(t>104){
+							moving = false;
+							clearInterval(timer);
+						}
+					}
+
+					function step_2() {
+
 						avec_heatmap(dates[t]["dates"]);
 						d3.select("#dates").text(dates[t]["dates"]);
 						t = t+1;
 
 						if(t>dates.length-1){
 							moving = false;
-							clearInterval(timer);
+							clearInterval(timer_2);
 							playButton.attr("class","fas fa-play");
 							t = 0;
 						}
